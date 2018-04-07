@@ -1,0 +1,82 @@
+
+#map {
+    background-color: #ffffff
+}
+th {
+    text-align: left;
+    vertical-align: top;
+	
+}
+.info {
+    padding: 6px 8px;
+    font: 14px/16px Arial, Helvetica, sans-serif;
+    background: white;
+    background: rgba(255,255,255,0.8);
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    border-radius: 5px;
+}
+.info h2 {
+    margin: 0 0 5px;
+    color: #777;
+}
+.leaflet-container {
+    background: #fff;
+    padding-right: 10px;
+}
+.leaflet-popup-content {
+    width: 700 px;
+    padding-right:10px;
+}
+.leaflet-tooltip {
+    background: none;
+    box-shadow: none;
+    border: none;
+}
+.leaflet-tooltip-left:before, .leaflet-tooltip-right:before {
+    border: 0px;
+}
+
+.legendbox {
+  float: left;
+  width: 200px;
+  height: 100px;
+  margin: 50px;
+  border: 1px solid rgba(0, 0, 0, .2);
+}
+
+.boxLeg {
+  float: left;
+  width: 20px;
+  height: 20px;
+  margin: 40px;
+  text-indent: 40px;
+  border: 1px solid rgba(0, 0, 0, .2);
+}
+
+.yellow {
+	float: left;
+  background: rgba(255,255,178,0.8); 
+}
+
+.orange {
+	float: left;
+  background: rgba(254,204,92,0.8);
+}
+
+.dark_orange {
+	float: left;
+  background: rgba(253,141,60,0.8);
+}
+
+.red {
+	float: left;
+  background: rgba(240,59,32,0.8);
+}
+
+.dark_red {
+	float: left;
+  background: rgba(189,0,38,0.8);
+} 
+
+
+
