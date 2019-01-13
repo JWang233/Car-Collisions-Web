@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+<!-- http://leafletjs.com/examples/geojson/ -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<link rel="stylesheet" href="css/leaflet.css">
+	<link rel="stylesheet" href="css/qgis2web.css">
+	
+	
+	
+	    <!-- Import Bootstrap UI Library for visualizing the entire app -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+	 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+	
+	
+	<!-- for the layer controls -->
+	<link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ==" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js" integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw==" crossorigin=""></script>
+	<title>GTA | Wazted</title>
+     <link rel="shortcut icon" href="css/images/crash_red.png" />
+
+    <style>
+        html,
+        body{
+            padding: 0;
+            margin: 0;
+            height: 100%;
+			width: 100%;
+            /* background-color: #ECEFF1 !important; */
+        }
+
+        .checkBoxed {
+            display: none
+        }
+		
+		.alignleft {
+			float: left;
+		}
+		.alignright {
+			float: right;
+		}
+    </style>
+
+
+
+	<!-- Import files -->
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="data/trt.geojson"></script>
+		<script src="data/hwy.geojson"></script>
+		<script src="js/layer_style_to.js"></script>
+		<script src="js/layer_style_hwy.js"></script>
+
+</head>
+
+<body>
+
+<!-- HOME BAR -->
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="index.html">
+           <img src="css/images/name.png"
+                height="30" class="d-inline-block align-top" alt="FRE">
+            <img src="css/images/crash.png"
+                width="30" height="30" class="d-inline-block align-top" alt="FRE"> <!-- Car Accident by Hea Poh Lin from the Noun Project -->
+				
+        </a>
+		
+		<!-- TABS  -->
+		<ul class="nav nav-n mt-1" id="myTab" role="tablist">
+			<li class="nav-item ml-1">
+				<a href="TRT.html">
+					<b>Toronto Roads</b></a>
+			</li>
+			<li class="nav-item">
+				<a href="">
+					<b>GTA Highways</b></a>
+			</li>
+		</ul>
+    </nav>
+
+		
+		
+	<!-- tabs content -->
+    <div class="tab-content" id="myTabContent">
+        	
+			<div class="tab-pane fade" id="road" role="tabpanel" aria-labelledby="road-tab">
+				<div class="container">
+
+							<div class="legendbox boxLeg yellow">
+								<div class="row" style="width: 500px; padding-left: 50px;">1-20%</div></div> 
+							<div class="legendbox boxLeg orange">
+								<div class="row" style="width: 500px; padding-left: 50px;">21-40%</div></div> 
+							<div class="legendbox boxLeg dark_orange">
+								<div class="row" style="width: 500px; padding-left: 50px;">41-60%</div></div>
+							<div class="legendbox boxLeg red">
+								<div class="row" style="width: 500px; padding-left: 50px;">61-80%</div></div>
+							<div class="legendbox boxLeg red">
+								<div class="row" style="width: 500px; padding-left: 50px;">81-100%</div></div>
+								
+					</div>
+					
+				</div>
+			</div>
+			
+	<!-- gta highway container -->
+			<div class="tab-pane fade show active" id="hwy" role="tabpanel" aria-labelledby="hwy-tab">
+				<div class="container">
+									
+									<h3><b>Collision-prone areas for highways in the Greater Toronto Area</b></h3><br>
+									<h4 class = "alignleft">Please select at least one value:</h4>
+									<h4 class = "alignright">Or select a temperature quantile:</h4>
+										<!-- JENS PART -->
+										<br><br>				
+										<div class="btn-group" role="group" aria-label="Basic example">
+											<select id="h_env" class="btn btn-link">
+												<option value="0" selected>Environmental factors</option>
+												<option value="1">Clear</option>
+												<option value="2">Daylight</option>
+												<option value="3">Snow</option>
+												<option value="4">Dark</option>
+												<option value="5">Dry Road</option>
+											</select>  
+											 
+											<select id="h_rd" class="btn btn-link"> 
+												<option value="0" selected>Road factors</option>
+												<option value="1">Non-intersection</option>
+												<option value="2">Straight level</option>
+											</select>      
+											<select id="h_drv" class="btn btn-link">
+												<option value="0" selected>Driving conditions</option>
+												<option value="1">Normal road conditions</option>
+												<option value="2">Normal driving conditions</option>
+											</select>
+											<button class="btn btn-info" onclick="h_changestyle()">Calculate</button><br><br>
+											</div>
+											<div class="btn-group pull-right" role="group" aria-label="Basic example">
+											<select id="h_wt" class="btn btn-link" onchange="h_changestyle1()">
+												<option value="0" disabled selected>Temperature quantiles</option>
+												<option value="1">-22°C to -10°C</option>
+												<option value="2">-10°C to 2°C</option>
+												<option value="3">-2°C to 5°C</option>
+												<option value="4">5°C to 13°C</option>
+												<option value="5">13°C to 30°C</option>
+											</select>
+											
+										</div>
+															
+
+					<!-- WHERE MAP IS PLACED -->
+								<div class="container-map2">
+									<div class="row" style="height: 600px;">
+										<div id="applicationDiv2" class="col-md">
+											<div id="map2" style="width: 100%; height: 100%;" class="border border-secondary rounded"></div>
+										</div>
+									</div>
+								</div>
+								<!-- legend -->
+							</br>
+						
+					
+						<h4 class="alignleft">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Collision vulnerability
+						<br><br>
+						<img src="css/images/gradient.png"></h4>					
+													
+						<h4 class="alignright">Count of accidents&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h4>
+						<h5 class ="alignright"><img src="css/images/legend.png"></h5>					
+																																						
+				</div>
+			</div>
+			
+			
+	</div>
+</div>
+
+
+			
+
+		
+<!-- MAP FUNCTIONS -->
+	<script>
+
+		
+	//<!-- GTA HIGHWAY MAP CONTENT -->
+		var map2 = L.map('map2', {
+			zoomControl:true, 
+			maxZoom:28, 
+			minZoom:9
+		}).fitBounds([[43.4859432586,-79.655396429],[43.9618222599,-79.1230572073]]);
+		var hash2 = new L.Hash(map2);	
+			map2.attributionControl.addAttribution('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a>');
+		var bounds_group2 = new L.featureGroup([]);
+		var basemap = L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png', {
+			attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
+			subdomains: 'abcd',
+			maxZoom: 19
+		});
+		basemap.addTo(map2);	
+	
+	
+	
+		
+	function pop_hwy_0(feature, layer) {
+            var popupContent = '<table>\
+				<tr>\
+					<td colspan="2"><strong>NAME</strong><br />' + (feature.properties['HWY'] !== null ? Autolinker.link(String(feature.properties['HWY'])) : '') + '</td>\
+				</tr>\
+				<tr>\
+					<td colspan="2"><strong>Description</strong><br />' + (feature.properties['DESC_'] !== null ? Autolinker.link(String(feature.properties['DESC_'])) : '') + '</td>\
+				</tr>\
+			</table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+	function pop_hwy_1(feature, layer) {
+            var popupContent = '<table>\
+				<tr>\
+					<td colspan="2"><strong>NAME</strong><br />' + (feature.properties['HWY'] !== null ? Autolinker.link(String(feature.properties['HWY'])) : '') + '</td>\
+				</tr>\
+				<tr>\
+					<td colspan="2"><strong>Description</strong><br />' + (feature.properties['DESC_'] !== null ? Autolinker.link(String(feature.properties['DESC_'])) : '') + '</td>\
+				</tr>\
+				<tr>\
+					<td colspan="2"><strong>-22°C to -10°C Collision Percentage</strong><br />' + (feature.properties['tmp1'] !== null ? Autolinker.link(String(parseInt(feature.properties['tmp1']))) : '') + '</td>\
+				</tr>\
+				<tr>\
+					<td colspan="2"><strong>-10°C to 2°C Collision Percentage</strong><br />' + (feature.properties['tmp2'] !== null ? Autolinker.link(String(parseInt(feature.properties['tmp2']))) : '') + '</td>\
+				</tr>\
+				<tr>\
+					<td colspan="2"><strong>-2°C to 5°C Collision Percentage</strong><br />' + (feature.properties['tmp3'] !== null ? Autolinker.link(String(parseInt(feature.properties['tmp3']))) : '') + '</td>\
+				</tr>\
+				<tr>\
+					<td colspan="2"><strong>5°C to 13°C Collision Percentage</strong><br />' + (feature.properties['tmp4'] !== null ? Autolinker.link(String(parseInt(feature.properties['tmp4']))) : '') + '</td>\
+				</tr>\
+				<tr>\
+					<td colspan="2"><strong>13°C to 30°C Collision Percentage</strong><br />' + (feature.properties['tmp5'] !== null ? Autolinker.link(String(parseInt(feature.properties['tmp5']))) : '') + '</td>\
+				</tr>\
+			</table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+	
+		
+	//<!-- GTA MAP -->
+		
+		map2.createPane('pane_hwy_0');
+		map2.getPane('pane_hwy_0').style.zIndex = 400;
+		map2.getPane('pane_hwy_0').style['mix-blend-mode'] = 'normal';
+		var layer_hwy_0 = new L.geoJson(json_hwy_0, {
+			attribution: '<a href=""></a>',
+			pane: 'pane_hwy_0',
+			onEachFeature: pop_hwy_0,
+			style: Hnew,
+		});
+		bounds_group2.addLayer(layer_hwy_0);
+		map2.addLayer(layer_hwy_0);
+		setBounds();
+
+		
+		
+
+		
+		
+	 </script>
+
+	 
+	
+</body>
+
+</html>
