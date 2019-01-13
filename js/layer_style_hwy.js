@@ -37,11 +37,11 @@ function h_changestyle() {
 function Hnew(feature) {
 			var attribute = h_calcT();//'T001'
 			if (attribute.length != 4) {attribute = "T000"}
-            if (feature.properties[attribute] > 0.000000 && feature.properties[attribute] <= 20.000000 ) {
+			if (feature.properties[attribute] > 0.000000 && feature.properties[attribute] <= 20.000000 ) {
                 return {
  				pane: 'pane_hwy_0',
                 opacity: 1,
-                color: 'rgba(255,255,178,0.8)',
+                color: 'rgba(240,193,64,0.8)',
                 dashArray: '',
                 lineCap: 'square',
                 lineJoin: 'bevel',
@@ -52,7 +52,7 @@ function Hnew(feature) {
                 return {
                 pane: 'pane_hwy_0',
                 opacity: 1,
-                color: 'rgba(254,204,92,0.8)',
+                color: 'rgba(247,142,102,0.8)',
                 dashArray: '',
                 lineCap: 'square',
                 lineJoin: 'bevel',
@@ -63,7 +63,7 @@ function Hnew(feature) {
                 return {
                 pane: 'pane_hwy_0',
                 opacity: 1,
-                color: 'rgba(253,141,60,0.8)',
+                color: 'rgba(253,99,132,0.8)',
                 dashArray: '',
                 lineCap: 'square',
                 lineJoin: 'bevel',
@@ -74,7 +74,7 @@ function Hnew(feature) {
                 return {
                 pane: 'pane_hwy_0',
                 opacity: 1,
-                color: 'rgba(240,59,32,0.8)',
+                color: 'rgba(212,61,165,0.8)',
                 dashArray: '',
                 lineCap: 'square',
                 lineJoin: 'bevel',
@@ -85,7 +85,7 @@ function Hnew(feature) {
                 return {
                 pane: 'pane_hwy_0',
                 opacity: 1,
-                color: 'rgba(189,0,38,0.8)',
+                color: 'rgba(139,0,162,0.8)',
                 dashArray: '',
                 lineCap: 'square',
                 lineJoin: 'bevel',
@@ -105,13 +105,14 @@ function Hnew(feature) {
             }
             }
         }
+            
  function HWnew(feature) {
-			 var attribute = h_calcW();//'T001'
-			 if (feature.properties[attribute] > 0.000000 && feature.properties[attribute] <= 20.000000 ) {
+	 var attribute = h_calcW();//'T001'
+	if (feature.properties[attribute] > 0.000000 && feature.properties[attribute] <= 20.000000 ) {
                 return {
  				pane: 'pane_hwy_0',
                 opacity: 1,
-                color: 'rgba(255,255,178,0.8)',
+                color: 'rgba(213,226,232,0.8)',
                 dashArray: '',
                 lineCap: 'square',
                 lineJoin: 'bevel',
@@ -122,7 +123,7 @@ function Hnew(feature) {
                 return {
                 pane: 'pane_hwy_0',
                 opacity: 1,
-                color: 'rgba(254,204,92,0.8)',
+                color: 'rgba(214,171,191,0.8)',
                 dashArray: '',
                 lineCap: 'square',
                 lineJoin: 'bevel',
@@ -133,7 +134,7 @@ function Hnew(feature) {
                 return {
                 pane: 'pane_hwy_0',
                 opacity: 1,
-                color: 'rgba(253,141,60,0.8)',
+                color: 'rgba(194,112,116,0.8)',
                 dashArray: '',
                 lineCap: 'square',
                 lineJoin: 'bevel',
@@ -144,7 +145,7 @@ function Hnew(feature) {
                 return {
                 pane: 'pane_hwy_0',
                 opacity: 1,
-                color: 'rgba(240,59,32,0.8)',
+                color: 'rgba(241,90,73,0.8)',
                 dashArray: '',
                 lineCap: 'square',
                 lineJoin: 'bevel',
@@ -155,7 +156,7 @@ function Hnew(feature) {
                 return {
                 pane: 'pane_hwy_0',
                 opacity: 1,
-                color: 'rgba(189,0,38,0.8)',
+                color: 'rgba(175,0,2,0.8)',
                 dashArray: '',
                 lineCap: 'square',
                 lineJoin: 'bevel',
